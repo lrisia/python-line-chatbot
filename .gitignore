@@ -155,4 +155,4 @@ poetry.toml
 
 # Config
 config.json
-/config
+config/
