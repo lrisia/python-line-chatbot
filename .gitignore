@@ -155,4 +155,16 @@ poetry.toml
 
 # Config
 config.json
-config/
+app/configuration/**
+!app/configuration/__init__.py
+!app/configuration/line_api.py
+!app/configuration/config.py
+!app/configuration/model.py
+!app/configuration/server.py
+
+# Data
+src/json/data.json
+src/images/*
+src/models/*
+src/logs/*
+app/static/*

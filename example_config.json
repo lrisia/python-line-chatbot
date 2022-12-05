@@ -6,7 +6,8 @@
     },
     
     "model": {
-        "conf": 0.65
+        "path": "\\src\\models\\model",
+        "conf": 0.8
     },
     
     "server": {

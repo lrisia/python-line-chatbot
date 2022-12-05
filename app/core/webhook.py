@@ -1,7 +1,7 @@
 class Webhook:
     """Handle post request from line webhook"""
 
-    def __inti__(self, payload: str) -> None:
+    def __init__(self, payload: str) -> None:
         """__init__ method
         
         Args:
@@ -12,3 +12,6 @@ class Webhook:
         self.userId = self.events['source']['userId']
         self.message = self.events['message']['text'].strip().lower()
         self.reply_token = self.events['replyToken']
+
+    def reply(self):
+        pass
