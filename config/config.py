@@ -58,3 +58,12 @@ class Config:
         for i in key:
             content = content[i]
         return content
+
+    def get_all(self) -> dict:
+        """Get all value in config file in dict format
+        
+        Returns:
+            dict: All content in config file
+        """
+
+        return self.content
