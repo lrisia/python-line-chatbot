@@ -34,6 +34,8 @@ class Config:
             dict: Content in config file
         """
 
+        if self.path != "" and not self.path.endswith('/'): self.path = self.path + '/'
+
         file_path = f'{self.path}{self.filename}.{self.extension}'
         content = dict()
 
@@ -53,10 +55,11 @@ class Config:
             any: Value in config file
         """
 
-        content = self.content
+        if len(key) == 1: return self.content[key]
 
+        content = []
         for i in key:
-            content = content[i]
+            content.append(self.content[i])
         return content
 
     def get_all(self) -> dict:

@@ -7,11 +7,14 @@ class Webhook:
         Args:
             payload: payload from line webhook
         """
-
-        self.events = payload['events'][0]
-        self.userId = self.events['source']['userId']
-        self.message = self.events['message']['text'].strip().lower()
-        self.reply_token = self.events['replyToken']
+        
+        try:
+            self.events = payload['events'][0]
+            self.userId = self.events['source']['userId']
+            self.message = self.events['message']['text'].strip().lower()
+            self.reply_token = self.events['replyToken']
+        except Exception as e:
+            raise e
 
     def reply(self):
         pass

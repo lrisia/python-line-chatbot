@@ -11,7 +11,7 @@ class Model:
         
 
         """
-
+        
         self.model = self.__load_model(config.model.MODEL_PATH)
         self.word2vec_model = self.__load_word2vec_model(config.model.WORD_2_VEC_MODEL_PATH)
         self.label = sorted(self.__label_list(config.label.LABEL))

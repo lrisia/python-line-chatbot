@@ -6,4 +6,4 @@ import configuration.server
 import configuration.answer
 import configuration.label
 import configuration.rich_menu
-import configuration.special_label
+import configuration.special_labels
