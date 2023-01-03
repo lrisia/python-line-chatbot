@@ -14,6 +14,7 @@ class Webhook:
             self.message = self.events['message']['text'].strip().lower()
             self.reply_token = self.events['replyToken']
         except Exception as e:
+            print("Something went wrong.")
             raise e
 
     def reply(self):

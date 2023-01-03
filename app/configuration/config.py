@@ -55,7 +55,7 @@ class Config:
             any: Value in config file
         """
 
-        if len(key) == 1: return self.content[key]
+        if len(key) == 1: return self.content[key[0]]
 
         content = []
         for i in key:
