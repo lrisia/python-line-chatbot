@@ -6,42 +6,48 @@ class FileHandle:
     """
     """
 
-    __DEFAULT_LOG_FILENANE = 'log'
-    __DEFAULT_ERROR_FILENANE = 'error'
-    __DEFAULT_LOG_PATH = 'src/logs'
-    __DEFAULT_ERROR_PATH = 'src/errors'
-    __DEFAULT_FILE_EXTENSION = 'csv'
-    __DEFAULT_RECORD_LIMIT = 1000
+    DEFAULT_LOG_FILENANE = 'log'
+    DEFAULT_ERROR_FILENANE = 'error'
+    DEFAULT_LOG_PATH = 'src/logs'
+    DEFAULT_ERROR_PATH = 'src/errors'
+    DEFAULT_FILE_EXTENSION = 'csv'
+    DEFAULT_RECORD_LIMIT = 1000
 
     def __init__(self, 
-        log_path: str=__DEFAULT_LOG_PATH,
-        error_path: str=__DEFAULT_ERROR_PATH,
-        log_filename: str=__DEFAULT_LOG_FILENANE,
-        error_filename: str=__DEFAULT_ERROR_FILENANE,
-        record_limit: int=__DEFAULT_RECORD_LIMIT,
+        log_path: str=DEFAULT_LOG_PATH,
+        error_path: str=DEFAULT_ERROR_PATH,
+        log_filename: str=DEFAULT_LOG_FILENANE,
+        error_filename: str=DEFAULT_ERROR_FILENANE,
+        record_limit: int=DEFAULT_RECORD_LIMIT,
     ) -> None:
         """
         """
 
-        self.log_filename = log_filename + '.' + self.__DEFAULT_FILE_EXTENSION
-        self.error_filename = error_filename + '.' + self.__DEFAULT_FILE_EXTENSION
+        self.log_filename = log_filename + '.' + self.DEFAULT_FILE_EXTENSION
+        self.error_filename = error_filename + '.' + self.DEFAULT_FILE_EXTENSION
         self.log_path = log_path
         self.error_path = error_path
         self.record_limit = record_limit
 
-    def __path_check(self, path: str, type: str="file") -> None:
+    def __path_check(self, path: str, auto_create: bool=True, type: str="file") -> None:
         isExist = os.path.exists(path)
-        if type == "directory" and not isExist: 
-            self.__create_directory(path)
-        elif type == "file" and not isExist:
-            self.__create_file(path)
+        if auto_create == False:
+            if not isExist: raise FileNotFoundError("File or directory does't exist.")
+
+        try:
+            if type == "directory" and not isExist: 
+                self.__create_directory(path)
+            elif type == "file" and not isExist:
+                self.__create_file(path)
+        except FileNotFoundError as e:
+            raise e
 
     def __create_directory(self, path: str) -> None:
-        if path == "": raise FileNotFoundError
+        if path == "": raise FileNotFoundError("Path cound't be empty.")
         os.mkdir(path)
 
     def __create_file(self, path: str) -> None:
-        if path == "": raise FileNotFoundError
+        if path == "": raise FileNotFoundError("Path cound't be empty.")
         with open(path, 'x') as f:
             f.close()
 
@@ -95,8 +101,9 @@ class FileHandle:
 
     def read_file(self, path: str, extension: str) -> str:
         if not path.endswith(f".{extension}"): path += f".{extension}"
+        self.__path_check(path, auto_create=False)
+    
         content = ""
-
         if extension == "json":
             with open(path, 'r', encoding="utf-8") as f:
                 content = json.load(f)

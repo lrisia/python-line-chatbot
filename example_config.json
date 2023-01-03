@@ -6,7 +6,7 @@
     },
     
     "model": {
-        "path": "\\src\\models\\model",
+        "path": "/src/models/model",
         "conf": 0.8
     },
     

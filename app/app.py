@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, send_from_directory
-# from core import *
-from core.file_handle import FileHandle
+from core import *
+from linebot import *
 
 # app = Flask(__name__)
 
@@ -16,9 +16,14 @@ from core.file_handle import FileHandle
 #     return send_from_directory('', path='')
 
 def main():
-    f = FileHandle()
-    f.write_log(conf=0.8, answer="abcdefghijklmnopqrstuvwxyz")
-    f.write_error(error="File not found", cause="File does't exits")
+    m = ImagemapBuilder(base_url="base_url", alt_text="alt_text", actions={"type": "message",})
+    # m.add_action(area={
+    #       "x": 529,
+    #       "y": 411,
+    #       "width": 497,
+    #       "height": 120
+    #     }, text="ขั้นตอนที่ 3")
+    # print(m.build())
 
 if __name__ == '__main__':
     main()
