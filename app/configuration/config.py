@@ -37,22 +37,22 @@ class Config:
         if self.path != "" and not self.path.endswith('/'): self.path = self.path + '/'
 
         file_path = f'{self.path}{self.filename}.{self.extension}'
-        content = dict()
+        content = None
 
         if self.extension == "json":
             with open(file_path, encoding='utf8') as f:
                 content = json.load(f)
-                f.close
+                f.close()
         return content[self.key]
 
-    def get(self, *key: str) -> any:
+    def get(self, *key: str) -> list:
         """Get value from config file
         
         Args:
             *key: Key to access value in dict, can be multivalue
 
         Returns:
-            any: Value in config file
+            any (list, str): Value from config file where *key
         """
 
         if len(key) == 1: return self.content[key[0]]

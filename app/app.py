@@ -1,29 +1,32 @@
 from flask import Flask, render_template, request, send_from_directory
-from core import *
-from linebot import *
+from app.core import *
+from app.linebot import *
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
-# @app.route('/webhook', methods=['POST'])
-# def webhook():
-#     webhook = Webhook(request.json)
-#     model = Model()
-#     # if เป็นรูป message ให้ทำ message builder แล้วส่งให้ webhook reply กลับไป
-#     # พรุ่งนี้ค่อยทำไปนอนละ
+model = Model()
 
-# @app.route('/images/<dirname>/<size>', methods=['GET'])
-# def get_image(dirname, size):
-#     return send_from_directory('', path='')
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    webhook = Webhook(request.json)
+    answer = model.predict(text=webhook.get_message())
+    webhook.reply_message("", MessageBuilder(answer).build())
+    return []
+    # if เป็นรูป message ให้ทำ message builder แล้วส่งให้ webhook reply กลับไป
+    # พรุ่งนี้ค่อยทำไปนอนละ
 
-def main():
-    m = ImagemapBuilder(base_url="base_url", alt_text="alt_text", actions={"type": "message",})
-    # m.add_action(area={
-    #       "x": 529,
-    #       "y": 411,
-    #       "width": 497,
-    #       "height": 120
-    #     }, text="ขั้นตอนที่ 3")
-    # print(m.build())
+@app.route('/images/<dirname>/<size>', methods=['GET'])
+def get_image(dirname, size):
+    return send_from_directory('', path='')
 
-if __name__ == '__main__':
-    main()
+def fetch():
+    global model
+    model = Model()
+
+
+# def main():
+#     m = Model()
+#     print(m.predict(text="วิธีการบันทึกข้อมูลแผนพัฒนา"))
+
+# if __name__ == '__main__':
+#     main()

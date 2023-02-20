@@ -1,2 +1,2 @@
-from linebot.webhook import Webhook
-from linebot.message_builder import *
+from app.linebot.webhook import Webhook
+from app.linebot.message_builder import *

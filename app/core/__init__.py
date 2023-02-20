@@ -1,2 +1,2 @@
-from core.model import Model
-from core.file_handle import FileHandle
+from app.core.model import Model
+from app.core.file_handle import FileHandle

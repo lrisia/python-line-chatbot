@@ -1,4 +1,4 @@
-from configuration import config
+from app.configuration import config
 
 __config = config.Config('server')
 

@@ -99,7 +99,7 @@ class FileHandle:
         result = result[:-1]
         self.__write_file(self.error_path, self.error_filename, result)
 
-    def read_file(self, path: str, extension: str) -> str:
+    def read_file(self, path: str, extension: str) -> any:
         if not path.endswith(f".{extension}"): path += f".{extension}"
         self.__path_check(path, auto_create=False)
     
